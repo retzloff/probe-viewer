@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Medifor Console Prototype</title>
+  </head>
+  <body>
+    <main>
+      <nav>
+        <div>Medifor</div>
+      </nav>
+
+      <div id="toolbar"></div>
+
+      <div id="gallery">
+        <p>Gallery</p>
+      </div>
+
+      <div id="probeInspectorExternal">
+        <dl>
+          <dt>Probe Inspector</dt>
+          <dd>➡️ Receives probe ID</dd>
+          <dd>↩️ New probe ID will reset PZR status</dd>
+          <dd>💾 Stores probe ID and PZR status</dd>
+          <dd>
+            ➡️❗ Receives PZR updates and reset requests as events and updates
+            data
+          </dd>
+        </dl>
+
+        <div id="probeInspector">
+          <div id="probeActions">
+            <dl>
+              <dt>Probe Actions: PZR - Color Map - Downloads</dt>
+              <dd>
+                ➡️ Receives PZR status
+              </dd>
+              <dd>
+                ⬆️ Sends PZR updates, colormap changes, and resets as events
+              </dd>
+            </dl>
+          </div>
+          <div id="viewer">
+            <dl>
+              <dt>Image Viewer or Video Player</dt>
+              <dd>
+                ➡️ Receives probe ID and PZR status
+              </dd>
+              <dd>
+                💾 Stores pause/play status and video meta information
+                (duration, current time, etc)
+              </dd>
+              <dd>
+                ➡️❗ Receives PZR updates and reset requests as events and
+                updates data
+              </dd>
+            </dl>
+            <div id="manipulator">
+              <dl>
+                <dt>Parent container for image or video PZR</dt>
+                <dd>
+                  ➡️ Receives probe ID, PZR status, and scrubber location and performs the necessary PZR
+                  transformations.
+                </dd>
+                <dd>
+                  <dl>
+                    <dt>Video Player only</dt>
+                    <dd>
+                      ⬆️ Sends pause/play status and video meta information as
+                      events
+                    </dd>
+                  </dl>
+                </dd>
+              </dl>
+            </div>
+            <div id="videoControls">
+              <dl>
+                <dt>Video Controls and Status</dt>
+                <dd>
+                  ➡️ Receives pause/play status and video meta information 
+                </dd>
+                <dd>
+                  ⬆️ Sends pause/play and clicked scrubber location as events
+                </dd>
+              </dl>
+            </div>
+          </div>
+
+          <div id="details">
+            <p>Details</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="index.js"></script>
+  </body>
+</html>

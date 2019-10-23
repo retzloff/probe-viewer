@@ -1,0 +1,74 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  box-sizing: border-box;
+  font-size: 11pt;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+main {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 40px 200px 1fr;
+  grid-template-rows: 30px 1fr;
+}
+
+nav {
+  background-color: #efefef;
+  grid-column: 1 / -1;
+  border-bottom: solid 1px #aaa;
+  font-size: 0.8rem;
+  padding: 6px;
+}
+
+#toolbar {
+  background-color: #666;
+}
+
+#gallery {
+  background-color: #ddd;
+  border-right: solid 1px #aaa;
+}
+
+#probeInspectorExternal {
+  max-height: 100%;
+}
+
+#probeInspectorExternal,
+#probeInspector div {
+  padding: 6px;
+  border: solid 2px hotpink;
+  margin: 6px;
+}
+
+#probeInspector {
+  xmin-height: 100%;
+  padding: 0px;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+#probeActions {
+}
+
+#details {
+  grid-column: 2 / -1;
+  grid-row: 1 / span 2;
+}
+
+dl {
+  _display: none;
+}
+dt {
+  font-weight: 500;
+}
+dd {
+  padding-left: 1em;
+}
