@@ -1,0 +1,23 @@
+{
+  "name": "prototype",
+  "version": "1.0.0",
+  "description": "Sample layout for Medifor",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "keywords": [
+    "medifor"
+  ],
+  "author": "E. Retzloff",
+  "license": "ISC",
+  "dependencies": {
+    "bulma": "^0.8.0",
+    "normalize.css": "^8.0.1"
+  },
+  "repository": {},
+  "devDependencies": {
+    "cssnano": "^4.1.10"
+  }
+}
