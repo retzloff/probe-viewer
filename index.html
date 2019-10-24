@@ -23,7 +23,13 @@
           <dt>Probe Inspector</dt>
           <dd>➡️ Receives probe ID</dd>
           <dd>↩️ New probe ID will reset PZR status</dd>
-          <dd>💾 Stores probe ID and PZR status</dd>
+          <dd>
+            💾 Stores
+            <ul>
+              <li>probe ID</li>
+              <li>PZR status</li>
+            </ul>
+          </dd>
           <dd>
             ➡️❗ Receives PZR updates and reset requests as events and updates
             data
@@ -33,12 +39,20 @@
         <div id="probeInspector">
           <div id="probeActions">
             <dl>
-              <dt>Probe Actions: PZR - Color Map - Downloads</dt>
+              <dt>Probe Actions: ZR - Color Map - Downloads</dt>
               <dd>
-                ➡️ Receives PZR status
+                ➡️ Receives ZR status
               </dd>
               <dd>
-                ⬆️ Sends PZR updates, colormap changes, and resets as events
+                ⬆️ Emits
+                <ul>
+                  <li>Zoom status updates, after calculating</li>
+                  <li>R updates</li>
+                  <li>Resets</li>
+                </ul>
+              </dd>
+              <dd>
+                Colormap changes (Vuex)
               </dd>
             </dl>
           </div>
@@ -49,27 +63,42 @@
                 ➡️ Receives probe ID and PZR status
               </dd>
               <dd>
-                💾 Stores pause/play status and video meta information
-                (duration, current time, etc)
+                💾 Stores
+                <ul>
+                  <li>Pause/play status</li>
+                  <li>Current time and duration of video</li>
+                  <li>Scrubber location</li>
+                </ul>
               </dd>
               <dd>
-                ➡️❗ Receives PZR updates and reset requests as events and
-                updates data
+                ➡️❗ Receives and PZ and scrubber location updates and pause/play changes
               </dd>
             </dl>
             <div id="manipulator">
               <dl>
                 <dt>Parent container for image or video PZR</dt>
+                <dd>Performs PZR transformations</dd>
                 <dd>
-                  ➡️ Receives probe ID, PZR status, and scrubber location and performs the necessary PZR
-                  transformations.
+                  ➡️ Receives probe ID, PZR status, play/pause status, and
+                  scrubber location.
+                </dd>
+                <dd>
+                  ⬆️ Emits
+                  <ul>
+                    <li>Pan status updates</li>
+                    <li>Zoom status updates, after calculating</li>
+                  </ul>
                 </dd>
                 <dd>
                   <dl>
                     <dt>Video Player only</dt>
                     <dd>
-                      ⬆️ Sends pause/play status and video meta information as
-                      events
+                      ⬆️ Emits
+                      <ul>
+                        <li>Paused/playing status</li>
+                        <li>Video playback information (current time)</li>
+                        <li>Video meta information (duration)</li>
+                      </ul>
                     </dd>
                   </dl>
                 </dd>
@@ -79,16 +108,24 @@
               <dl>
                 <dt>Video Controls and Status</dt>
                 <dd>
-                  ➡️ Receives pause/play status and video meta information 
+                  ➡️ Receives pause/play status, current time, and duration
                 </dd>
                 <dd>
-                  ⬆️ Sends pause/play and clicked scrubber location as events
+                  ⬆️ Emits
+                  <ul>
+                    <li>Paused/playing changes</li>
+                    <li>Clicked scrubber location</li>
+                  </ul>
                 </dd>
               </dl>
             </div>
           </div>
 
           <div id="details">
+              <span>Detectors</span>
+              <span>Supplemental</span>
+              <span>Meta</span>
+              <span>Labels</span>
             <p>Details</p>
           </div>
         </div>
