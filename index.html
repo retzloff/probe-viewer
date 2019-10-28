@@ -20,48 +20,43 @@
 
       <div id="probeInspectorExternal">
         <dl>
-          <dt>Probe Inspector</dt>
-          <dd>➡️ Receives probe ID</dd>
+          <dt>Medifor Inspector</dt>
+          <dd>👀 Watches probe ID for changes (Store) and resets transformations on change</dd>
           <dd>↩️ New probe ID will reset PZR status</dd>
           <dd>
             💾 Stores
             <ul>
-              <li>probe ID</li>
               <li>PZR status</li>
             </ul>
           </dd>
-          <dd>
-            ➡️❗ Receives PZR updates and reset requests as events and updates
-            data
-          </dd>
+          <dd>️⬇️ Passes PZR status</dd>
+
+          <dd>👂Receives PZR updates and updates data</dd>
+          <dd>👂Receives reset requests</dd>
         </dl>
 
         <div id="probeInspector">
           <div id="probeActions">
             <dl>
-              <dt>Probe Actions: ZR - Color Map - Downloads</dt>
-              <dd>
-                ➡️ Receives ZR status
-              </dd>
+              <dt>Inspector Actions: zoom and rotate - color map selector - downloads</dt>
+              <dd>👀 Watches for colormap changes (Store)</dd>
+              <dd>⬇️ Receives ZR status</dd>
               <dd>
                 ⬆️ Emits
                 <ul>
-                  <li>Zoom status updates, after calculating</li>
-                  <li>R updates</li>
-                  <li>Resets</li>
+                  <li>Relative zoom updates (+/- value)</li>
+                  <li>Relative rotation updates (+/- value)</li>
+                  <li>Resets - set zoom/rotation to 0 </li>
+                  <li>Colormap changes (Store) </li>
                 </ul>
-              </dd>
-              <dd>
-                Colormap changes (Vuex)
               </dd>
             </dl>
           </div>
           <div id="viewer">
             <dl>
-              <dt>Image Viewer or Video Player</dt>
-              <dd>
-                ➡️ Receives probe ID and PZR status
-              </dd>
+              <dt>Media Container</dt>
+              <dd>👀 Watches probe ID for changes (Vuex)</dd>
+              <dd>️⬇️ Passes PZR status to the transformer</dd>
               <dd>
                 💾 Stores
                 <ul>
@@ -70,16 +65,15 @@
                   <li>Scrubber location</li>
                 </ul>
               </dd>
-              <dd>
-                ➡️❗ Receives and PZ and scrubber location updates and pause/play changes
-              </dd>
+              <dd>👂Receives pan/zoom from Transformer</dd>
+              <dd>👂Receives pause/play changes and scrubber location updates from video controls</dd>
             </dl>
-            <div id="manipulator">
+
+            <div id="transformer">
               <dl>
-                <dt>Parent container for image or video PZR</dt>
-                <dd>Performs PZR transformations</dd>
+                <dt>Transformer - Parent container for image or video PZR that performs PZR transformations</dt>
                 <dd>
-                  ➡️ Receives probe ID, PZR status, play/pause status, and
+                    ⬇️ Receives probe ID, PZR status, play/pause status, and
                   scrubber location.
                 </dd>
                 <dd>
@@ -103,10 +97,15 @@
                   </dl>
                 </dd>
               </dl>
+
+              <div id="mediforImage">Medifor Image</div>
+              <div id="mediforVideo">Medifor Video</div>
+
             </div>
+
             <div id="videoControls">
               <dl>
-                <dt>Video Controls and Status</dt>
+                <dt>Video Controller</dt>
                 <dd>
                   ➡️ Receives pause/play status, current time, and duration
                 </dd>
