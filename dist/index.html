@@ -1,1 +1,168 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge"><title>Medifor Console Prototype</title><link rel="stylesheet" href="/prototype.83c3624f.css"></head><body> <main> <nav> <div>Medifor</div> </nav> <div id="toolbar"></div> <div id="gallery"> <p>Gallery</p> </div> <div id="probeInspectorExternal"> <dl> <dt>Medifor Inspector</dt> <dd>👀 Watches probe ID for changes (Store) and resets transformations on change</dd> <dd>↩️ New probe ID will reset PZR status</dd> <dd> 💾 Stores <ul> <li>PZR status</li> </ul> </dd> <dd>️⬇️ Passes PZR status</dd> <dd>👂Receives PZR updates and updates data</dd> <dd>👂Receives reset requests</dd> </dl> <div id="probeInspector"> <div id="probeActions"> <dl> <dt>Inspector Actions: zoom and rotate - color map selector - downloads</dt> <dd>👀 Watches for colormap changes (Store)</dd> <dd>⬇️ Receives ZR status</dd> <dd> ⬆️ Emits <ul> <li>Relative zoom updates (+/- value)</li> <li>Relative rotation updates (+/- value)</li> <li>Resets - set zoom/rotation to 0 </li> <li>Colormap changes (Store) </li> </ul> </dd> </dl> </div> <div id="viewer"> <dl> <dt>Media Container</dt> <dd>👀 Watches probe ID for changes (Vuex)</dd> <dd>️⬇️ Passes PZR status to the transformer</dd> <dd> 💾 Stores <ul> <li>Pause/play status</li> <li>Current time and duration of video</li> <li>Scrubber location</li> </ul> </dd> <dd>👂Receives pan/zoom from Transformer</dd> <dd>👂Receives pause/play changes and scrubber location updates from video controls</dd> </dl> <div id="transformer"> <dl> <dt>Transformer - Parent container for image or video PZR that performs PZR transformations</dt> <dd> ⬇️ Receives probe ID, PZR status, play/pause status, and scrubber location. </dd> <dd> ⬆️ Emits <ul> <li>Pan status updates</li> <li>Zoom status updates, after calculating</li> </ul> </dd> <dd> <dl> <dt>Video Player only</dt> <dd> ⬆️ Emits <ul> <li>Paused/playing status</li> <li>Video playback information (current time)</li> <li>Video meta information (duration)</li> </ul> </dd> </dl> </dd> </dl> <div id="mediforImage">Medifor Image</div> <div id="mediforVideo">Medifor Video</div> </div> <div id="videoControls"> <dl> <dt>Video Controller</dt> <dd> ➡️ Receives pause/play status, current time, and duration </dd> <dd> ⬆️ Emits <ul> <li>Paused/playing changes</li> <li>Clicked scrubber location</li> </ul> </dd> </dl> </div> </div> <div id="details"> <span>Detectors</span> <span>Supplemental</span> <span>Meta</span> <span>Labels</span> <p>Details</p> </div> </div> </div> </main> <script src="/prototype.d65e5b48.js"></script> </body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Medifor Console Prototype</title>
+<link rel="stylesheet" href="/prototype.e31bb0bc.css"></head>
+
+<body>
+  <main>
+    <nav>
+      <div>Medifor</div>
+    </nav>
+
+    <div id="probeInspectorExternal">
+      <dl>
+        <dt>Medifor Inspector</dt>
+        <dd>👀 Watches probe ID changes (store)</dd>
+        <dd> ⬇️ Passes probe ID</dd>
+      </dl>
+
+      <div id="probeInspector">
+        <div id="viewer">
+          <dl>
+            <dt>Medifor Media Container</dt>
+            <dd>↘️ Receives probe ID</dd>
+            <dd>👀 Watches colormap changes (store) </dd>
+            <dd> ⬇️ Passes probe ID</dd>
+          </dl>
+
+
+          <div id="mediforImage">
+            <dl>
+              <dt>Medifor Image</dt>
+              <dd>
+                ↘️ Receives
+                <ul>
+                  <li>probe ID</li>
+                  <li>colormap</li>
+                </ul>
+              </dd>
+              <dd class="html-hint">
+                <pre>&lt;Transformer&gt; 
+  &lt;div&gt; 
+    &lt;img#mask /&gt; (optional)
+    &lt;img /&gt;
+  &lt;/div&gt; 
+&lt;/Transformer&gt;</pre>
+              </dd>
+            </dl>
+          </div>
+
+          <div id="mediforVideo">
+            <dl>
+              <dt>Medifor Video</dt>
+              <dd>
+                ↘️ Receives
+                <ul>
+                  <li>probe ID</li>
+                  <li>colormap</li>
+                </ul>
+              </dd>
+
+              <dd>
+                💾 Stores
+                <ul>
+                  <li>Pause/play status</li>
+                  <li>Current time and duration of video</li>
+                  <li>Scrubber location</li>
+                </ul>
+              </dd>
+              <dd>
+                👂 Receives pause/play changes and scrubber location updates
+                from video controller and passes them to <code>video</code>
+              </dd>
+              <dd>
+                ⬇️ Passes
+                <ul>
+                  <li>Paused/playing status</li>
+                  <li>Video playback information (current time)</li>
+                  <li>Video meta information (duration)</li>
+                  <li>Colormap (for frame timeline)</li>
+                </ul>
+              </dd>
+              <dd class="html-hint">
+                <pre>&lt;Transformer&gt; 
+  &lt;video /&gt;
+&lt;/Transformer&gt;</pre>
+              </dd>
+            </dl>
+
+            <div id="videoControls">
+              <dl>
+                <dt>Video Controller</dt>
+                <dd>
+                  ↘️ Receives pause/play status, current time, duration, and colormap
+                </dd>
+                <dd>
+                  📣 Emits
+                  <ul>
+                    <li>Paused/playing changes</li>
+                    <li>Clicked scrubber location</li>
+                  </ul>
+                </dd>
+                <dd class="html-hint">
+                  <pre>&lt;FrameTimeline /&gt;</pre>
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+
+        <div id="details">
+          <span>Detectors</span>
+          <span>Meta</span>
+          <span>Labels</span>
+          <dl>
+            <dt>
+              Details
+            </dt>
+            <dd>↘️ Receives probe ID</dd>
+            <dd>
+              📣 Emits - selected analytic
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div id="transformer" class="helperComponent">
+        <dl>
+          <dt>
+            Transformer - Performs PZR transformations
+          </dt>
+          <dd>
+            ➡️ Receives an element as a <code>slot</code> to transform
+          </dd>
+        </dl>
+      </div>
+
+      <div id="probeActions" class="helperComponent">
+        <dl>
+          <dt>
+            Inspector Actions: zoom and rotate - color map selector
+          </dt>
+          <dd>↘️ Receives zoom status to display</dd>
+          <dd>
+            📣 Emits
+            <ul>
+              <li>Zoom in / zoom out actions</li>
+              <li>Rotate actions</li>
+              <li>Pan actions</li>
+              <li>Resets</li>
+              <li>Colormap changes (store)</li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </main>
+
+  <script src="/prototype.e31bb0bc.js"></script>
+</body>
+
+</html>
